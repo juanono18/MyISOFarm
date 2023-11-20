@@ -1,0 +1,214 @@
+[gd_scene load_steps=28 format=3 uid="uid://d4fvwju6llih5"]
+
+[ext_resource type="Script" path="res://world.gd" id="1_kpnr0"]
+[ext_resource type="Texture2D" uid="uid://d4acv3xj4w8e3" path="res://tileset.png" id="1_mxe2x"]
+[ext_resource type="Texture2D" uid="uid://bxadacpuhjhnm" path="res://animatedBG.png" id="2_u82p7"]
+[ext_resource type="Script" path="res://Camera2D.gd" id="3_1bjbt"]
+[ext_resource type="Script" path="res://TileMap.gd" id="3_q0x14"]
+[ext_resource type="Texture2D" uid="uid://dj3ei34gd4kem" path="res://scorebox.png" id="5_pqrvl"]
+[ext_resource type="Texture2D" uid="uid://iify5cmm3a5k" path="res://WheatIcon.png" id="7_w3sif"]
+[ext_resource type="FontFile" uid="uid://cnvxbs545p4dy" path="res://VCR_OSD_MONO_1.001.ttf" id="8_ybhcg"]
+[ext_resource type="AudioStream" uid="uid://c6lj3rbos4e0g" path="res://477391__nuff3__steps-dirt_1b.ogg" id="9_24nw5"]
+[ext_resource type="AudioStream" uid="uid://dbkv0jrrdnbyr" path="res://699493__valenspire__plant_harvest_04.wav" id="10_bt84x"]
+[ext_resource type="AudioStream" uid="uid://b3s4mmybj1yfy" path="res://477782__breviceps__spitting-a-watermelon-seed.mp3" id="11_g67ca"]
+[ext_resource type="AudioStream" uid="uid://ch2lbas6fkcpv" path="res://516257__wyronroberth__grab-_-can-watering.mp3" id="12_dd11e"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_252pr"]
+texture = ExtResource("1_mxe2x")
+texture_region_size = Vector2i(32, 32)
+0:0/0 = 0
+1:0/0 = 0
+2:0/0 = 0
+3:0/0 = 0
+4:0/0 = 0
+5:0/0 = 0
+6:0/0 = 0
+7:0/0 = 0
+8:0/0 = 0
+
+[sub_resource type="TileSet" id="TileSet_tnypq"]
+resource_local_to_scene = true
+tile_shape = 1
+tile_layout = 5
+tile_size = Vector2i(32, 17)
+sources/1 = SubResource("TileSetAtlasSource_252pr")
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nbgr6"]
+atlas = ExtResource("2_u82p7")
+region = Rect2(288, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_d0nbh"]
+atlas = ExtResource("2_u82p7")
+region = Rect2(320, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_owk18"]
+atlas = ExtResource("2_u82p7")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gdwq0"]
+atlas = ExtResource("2_u82p7")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_76fqy"]
+atlas = ExtResource("2_u82p7")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_m1kjt"]
+atlas = ExtResource("2_u82p7")
+region = Rect2(96, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vym3w"]
+atlas = ExtResource("2_u82p7")
+region = Rect2(128, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_u3gm0"]
+atlas = ExtResource("2_u82p7")
+region = Rect2(160, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1twui"]
+atlas = ExtResource("2_u82p7")
+region = Rect2(192, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1j68t"]
+atlas = ExtResource("2_u82p7")
+region = Rect2(224, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5ufh1"]
+atlas = ExtResource("2_u82p7")
+region = Rect2(256, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_8lmly"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_nbgr6")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_d0nbh")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_owk18")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gdwq0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_76fqy")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_m1kjt")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vym3w")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_u3gm0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1twui")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1j68t")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5ufh1")
+}],
+"loop": true,
+"name": &"default",
+"speed": 4.0
+}]
+
+[sub_resource type="LabelSettings" id="LabelSettings_w66c2"]
+font = ExtResource("8_ybhcg")
+font_size = 39
+
+[node name="World" type="Node2D"]
+script = ExtResource("1_kpnr0")
+
+[node name="TileMap" type="TileMap" parent="."]
+y_sort_enabled = true
+texture_filter = 1
+tile_set = SubResource("TileSet_tnypq")
+format = 2
+layer_0/name = "0"
+layer_0/y_sort_enabled = true
+layer_1/name = "1"
+layer_1/enabled = true
+layer_1/modulate = Color(1, 1, 1, 1)
+layer_1/y_sort_enabled = true
+layer_1/y_sort_origin = 0
+layer_1/z_index = -1
+layer_1/tile_data = PackedInt32Array(131072, 1, 0, 196609, 1, 0, 262146, 1, 0, 131074, 1, 0, 196610, 1, 0, -65535, 1, 0, -131070, 1, 0, 2, 1, 0, -65536, 1, 0, 0, 1, 0, -131071, 1, 0, 65536, 1, 0, 1, 1, 0, 65537, 1, 0, 131073, 1, 0, 65538, 1, 0, -65534, 1, 0, 196611, 1, 0, 131075, 1, 0, 65539, 1, 0, 3, 1, 0, -65533, 1, 0, -65532, 1, 0, 4, 1, 0, 5, 1, 0, 65541, 1, 0, 131077, 1, 0, 131076, 1, 0, 65540, 1, 0, -131069, 1, 0, -196607, 1, 0, -196606, 1, 0, -262143, 1, 0, -65537, 1, 0, -131072, 1, 0, -1, 1, 0)
+script = ExtResource("3_q0x14")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(-53, 21)
+offset = Vector2(100, 0)
+zoom = Vector2(5, 5)
+drag_horizontal_enabled = true
+drag_vertical_enabled = true
+script = ExtResource("3_1bjbt")
+
+[node name="ParallaxBackground" type="ParallaxBackground" parent="."]
+scale = Vector2(30, 30)
+transform = Transform2D(30, 0, 0, 30, 0, 0)
+scroll_base_scale = Vector2(7, 7)
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="ParallaxBackground"]
+z_index = -5
+texture_filter = 1
+position = Vector2(19.2667, 10.9167)
+scale = Vector2(1.22083, 0.692708)
+sprite_frames = SubResource("SpriteFrames_8lmly")
+frame = 4
+frame_progress = 0.430571
+
+[node name="WheatTimer" type="Timer" parent="."]
+wait_time = 2.0
+autostart = true
+
+[node name="GrassTimer" type="Timer" parent="."]
+wait_time = 2.0
+autostart = true
+
+[node name="UI" type="CanvasLayer" parent="."]
+
+[node name="WheatScore" type="Node2D" parent="UI"]
+
+[node name="ScoreBox" type="Sprite2D" parent="UI/WheatScore"]
+texture_filter = 1
+position = Vector2(1050, 53)
+scale = Vector2(3, 3)
+texture = ExtResource("5_pqrvl")
+
+[node name="ScoreIcon" type="Sprite2D" parent="UI/WheatScore"]
+texture_filter = 1
+position = Vector2(908, 53)
+scale = Vector2(3, 3)
+texture = ExtResource("7_w3sif")
+
+[node name="Score" type="Label" parent="UI/WheatScore"]
+texture_filter = 1
+offset_left = 968.0
+offset_top = 32.0
+offset_right = 1133.0
+offset_bottom = 76.0
+text = "0000000"
+label_settings = SubResource("LabelSettings_w66c2")
+
+[node name="Sounds" type="Node2D" parent="."]
+
+[node name="hoe" type="AudioStreamPlayer" parent="Sounds"]
+stream = ExtResource("9_24nw5")
+
+[node name="harvest" type="AudioStreamPlayer" parent="Sounds"]
+stream = ExtResource("10_bt84x")
+
+[node name="plant" type="AudioStreamPlayer" parent="Sounds"]
+stream = ExtResource("11_g67ca")
+
+[node name="watering" type="AudioStreamPlayer" parent="Sounds"]
+stream = ExtResource("12_dd11e")
+
+[connection signal="timeout" from="WheatTimer" to="TileMap" method="_on_wheat_timer_timeout"]
+[connection signal="timeout" from="GrassTimer" to="TileMap" method="_on_grass_timer_timeout"]

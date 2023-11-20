@@ -1,0 +1,14 @@
+AudioStreamPlayer
+Node2D
+Label
+RichTextLabel
+Sprite2D
+CanvasLayer
+MarginContainer
+Container
+SubViewport
+Timer
+ParallaxBackground
+AnimatedSprite2D
+Camera2D
+TileMap
