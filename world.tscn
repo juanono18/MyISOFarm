@@ -25,6 +25,7 @@ texture_region_size = Vector2i(32, 32)
 6:0/0 = 0
 7:0/0 = 0
 8:0/0 = 0
+9:0/0 = 0
 
 [sub_resource type="TileSet" id="TileSet_tnypq"]
 resource_local_to_scene = true
@@ -139,6 +140,13 @@ layer_1/y_sort_enabled = true
 layer_1/y_sort_origin = 0
 layer_1/z_index = -1
 layer_1/tile_data = PackedInt32Array(131072, 1, 0, 196609, 1, 0, 262146, 1, 0, 131074, 1, 0, 196610, 1, 0, -65535, 1, 0, -131070, 1, 0, 2, 1, 0, -65536, 1, 0, 0, 1, 0, -131071, 1, 0, 65536, 1, 0, 1, 1, 0, 65537, 1, 0, 131073, 1, 0, 65538, 1, 0, -65534, 1, 0, 196611, 1, 0, 131075, 1, 0, 65539, 1, 0, 3, 1, 0, -65533, 1, 0, -65532, 1, 0, 4, 1, 0, 5, 1, 0, 65541, 1, 0, 131077, 1, 0, 131076, 1, 0, 65540, 1, 0, -131069, 1, 0, -196607, 1, 0, -196606, 1, 0, -262143, 1, 0, -65537, 1, 0, -131072, 1, 0, -1, 1, 0)
+layer_2/name = "hover"
+layer_2/enabled = true
+layer_2/modulate = Color(1, 1, 1, 1)
+layer_2/y_sort_enabled = true
+layer_2/y_sort_origin = -1
+layer_2/z_index = 0
+layer_2/tile_data = PackedInt32Array()
 script = ExtResource("3_q0x14")
 
 [node name="Camera2D" type="Camera2D" parent="."]
@@ -160,8 +168,7 @@ texture_filter = 1
 position = Vector2(19.2667, 10.9167)
 scale = Vector2(1.22083, 0.692708)
 sprite_frames = SubResource("SpriteFrames_8lmly")
-frame = 4
-frame_progress = 0.430571
+frame = 6
 
 [node name="WheatTimer" type="Timer" parent="."]
 wait_time = 2.0

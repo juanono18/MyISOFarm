@@ -10,23 +10,37 @@ var dirtSound: AudioStreamPlayer
 var harvestSound: AudioStreamPlayer
 var plantSound: AudioStreamPlayer
 var waterSound: AudioStreamPlayer
+var prevTile
 func _ready():
 	pass # Replace with function body.
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	pass
+	updateHoverOnTile()
+	
+func updateHoverOnTile():
+	var tile = local_to_map(Vector2(get_global_mouse_position().x+5,get_global_mouse_position().y+10))
+	if(get_cell_atlas_coords(1,tile) != Vector2i(-1,-1)):
+		set_cell(2,Vector2(tile.x-1,tile.y-1),1,Vector2(9,0),0)
+	if(prevTile != null):
+		#print("here")
+		if(tile != prevTile):
+			#print(prevTile)
+			set_cell(2,Vector2(prevTile.x-1,prevTile.y-1))
+	prevTile = tile
 func setWslabel(label:Label):
 	wslabel = label
+	
 func setSounds( dirtSound1: AudioStreamPlayer,harvestSound1: AudioStreamPlayer,plantSound1: AudioStreamPlayer,waterSound1: AudioStreamPlayer):
 	dirtSound = dirtSound1
 	harvestSound=harvestSound1
 	plantSound=plantSound1
 	waterSound=waterSound1
+	
 func _input(event):
 	if event.is_action_pressed("LeftClick"):
-		var tile = local_to_map(get_global_mouse_position())
+		var tile = local_to_map(Vector2(get_global_mouse_position().x+5,get_global_mouse_position().y+10))
 		print(get_cell_atlas_coords(1,tile),get_cell_atlas_coords(0,Vector2(tile.x-1,tile.y-1)))
 		#si es tierra arar
 		if(get_cell_atlas_coords(1,tile) == Vector2i(0,0) or get_cell_atlas_coords(1,tile) == Vector2i(1,0)):
@@ -84,6 +98,9 @@ func _on_wheat_timer_timeout():
 
 func _on_grass_timer_timeout():
 	for dirt in dirtFields:
-		set_cell(1,dirt,1,Vector2(0,0),0)
-		dirtFields.erase(dirt)
+		if(get_cell_atlas_coords(1,dirt) != Vector2i(1,0)):
+			dirtFields.erase(dirt)
+		else:
+			set_cell(1,dirt,1,Vector2(0,0),0)
+			dirtFields.erase(dirt)
 	pass # Replace with function body.
