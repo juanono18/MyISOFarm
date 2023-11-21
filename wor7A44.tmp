@@ -1,4 +1,4 @@
-[gd_scene load_steps=48 format=3 uid="uid://d4fvwju6llih5"]
+[gd_scene load_steps=42 format=3 uid="uid://d4fvwju6llih5"]
 
 [ext_resource type="Script" path="res://world.gd" id="1_kpnr0"]
 [ext_resource type="Texture2D" uid="uid://d4acv3xj4w8e3" path="res://tileset.png" id="1_mxe2x"]
@@ -13,15 +13,10 @@
 [ext_resource type="AudioStream" uid="uid://dbkv0jrrdnbyr" path="res://699493__valenspire__plant_harvest_04.wav" id="10_bt84x"]
 [ext_resource type="Texture2D" uid="uid://bma5tyo01ttfh" path="res://InventoryIcon_Opened.png" id="10_ffumc"]
 [ext_resource type="Texture2D" uid="uid://b5p7edkj0lepp" path="res://popupboxTexture.png" id="11_aivt5"]
-[ext_resource type="Texture2D" uid="uid://c04o2lmtftbcw" path="res://popupboxTexture1.png" id="11_alen4"]
 [ext_resource type="AudioStream" uid="uid://b3s4mmybj1yfy" path="res://477782__breviceps__spitting-a-watermelon-seed.mp3" id="11_g67ca"]
 [ext_resource type="Texture2D" uid="uid://erj3glf7ucdm" path="res://wheatSeedBagTexture.png" id="12_bne0w"]
 [ext_resource type="AudioStream" uid="uid://ch2lbas6fkcpv" path="res://516257__wyronroberth__grab-_-can-watering.mp3" id="12_dd11e"]
-[ext_resource type="Texture2D" uid="uid://bs321hjdlok2o" path="res://carrotSeedBagTexture.png" id="13_210n2"]
 [ext_resource type="Script" path="res://inventoryButton.gd" id="13_rgkiy"]
-[ext_resource type="Texture2D" uid="uid://cti5hjak8kotr" path="res://CancelTexture.png" id="15_i657f"]
-[ext_resource type="AudioStream" uid="uid://8k07t7m67bo2" path="res://419023__jacco18__acess-denied-buzz.mp3" id="21_lf5a1"]
-[ext_resource type="AudioStream" uid="uid://bappd4cgduf0i" path="res://352117__inspectorj__dropping-wood-e.wav" id="22_m5kyv"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_ufafw"]
 texture = ExtResource("1_mxe2x")
@@ -154,10 +149,6 @@ texture = ExtResource("10_ffumc")
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_7q32l"]
 
-[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_02cxr"]
-texture = ExtResource("11_alen4")
-modulate_color = Color(0.592157, 0.592157, 0.592157, 1)
-
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_ncqk6"]
 texture = ExtResource("11_aivt5")
 
@@ -182,17 +173,21 @@ PopupMenu/constants/item_start_padding = 0
 PopupMenu/constants/outline_size = 0
 PopupMenu/constants/separator_outline_size = 0
 PopupMenu/constants/v_separation = 0
+PopupMenu/font_sizes/font_separator_size = 16
+PopupMenu/font_sizes/font_size = 16
+PopupMenu/fonts/font = ExtResource("8_ybhcg")
+PopupMenu/fonts/font_separator = ExtResource("8_ybhcg")
 PopupMenu/icons/radio_checked = SubResource("ViewportTexture_2loor")
 PopupMenu/icons/radio_checked_disabled = SubResource("ViewportTexture_2loor")
 PopupMenu/icons/radio_unchecked = SubResource("ViewportTexture_7q32l")
 PopupMenu/icons/submenu_mirrored = null
 PopupMenu/icons/unchecked = null
 PopupMenu/icons/unchecked_disabled = null
-PopupMenu/styles/hover = SubResource("StyleBoxTexture_02cxr")
+PopupMenu/styles/hover = SubResource("StyleBoxTexture_ncqk6")
 PopupMenu/styles/labeled_separator_left = null
 PopupMenu/styles/labeled_separator_right = null
 PopupMenu/styles/panel = SubResource("StyleBoxTexture_ncqk6")
-PopupMenu/styles/panel_disabled = SubResource("StyleBoxTexture_ncqk6")
+PopupMenu/styles/panel_disabled = null
 PopupMenu/styles/separator = null
 
 [sub_resource type="LabelSettings" id="LabelSettings_qrws6"]
@@ -256,7 +251,6 @@ autostart = true
 [node name="UI" type="CanvasLayer" parent="."]
 
 [node name="WheatScore" type="Node2D" parent="UI"]
-visible = false
 
 [node name="ScoreBox" type="Sprite2D" parent="UI/WheatScore"]
 texture_filter = 1
@@ -281,39 +275,32 @@ label_settings = SubResource("LabelSettings_w66c2")
 
 [node name="inventoryButton" type="OptionButton" parent="UI"]
 texture_filter = 1
-offset_left = 9.0
+offset_left = 23.0
 offset_top = 10.0
-offset_right = 153.0
-offset_bottom = 130.0
-size_flags_horizontal = 4
-size_flags_vertical = 4
+offset_right = 142.0
+offset_bottom = 120.0
 theme = SubResource("Theme_kgq3e")
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 0
-theme_override_font_sizes/font_size = 0
 alignment = 1
 icon_alignment = 1
-expand_icon = true
-item_count = 3
+item_count = 1
 popup/item_0/text = ""
 popup/item_0/icon = ExtResource("12_bne0w")
 popup/item_0/id = 0
-popup/item_1/text = ""
-popup/item_1/icon = ExtResource("13_210n2")
-popup/item_1/id = 1
-popup/item_2/text = ""
-popup/item_2/icon = ExtResource("15_i657f")
-popup/item_2/id = 2
 script = ExtResource("13_rgkiy")
 
 [node name="Label" type="Label" parent="UI/inventoryButton"]
 layout_mode = 0
-offset_left = 89.0
-offset_top = 90.0
-offset_right = 129.0
-offset_bottom = 108.0
+offset_left = 87.0
+offset_top = 92.0
+offset_right = 127.0
+offset_bottom = 110.0
+text = "x20"
 label_settings = SubResource("LabelSettings_qrws6")
-horizontal_alignment = 2
+
+[node name="PopupMenu" type="PopupMenu" parent="UI/inventoryButton"]
+canvas_item_default_texture_filter = 0
 
 [node name="Sounds" type="Node2D" parent="."]
 
@@ -329,13 +316,5 @@ stream = ExtResource("11_g67ca")
 [node name="watering" type="AudioStreamPlayer" parent="Sounds"]
 stream = ExtResource("12_dd11e")
 
-[node name="denied" type="AudioStreamPlayer" parent="Sounds"]
-stream = ExtResource("21_lf5a1")
-
-[node name="openinv" type="AudioStreamPlayer" parent="Sounds"]
-stream = ExtResource("22_m5kyv")
-
 [connection signal="timeout" from="WheatTimer" to="TileMap" method="_on_wheat_timer_timeout"]
 [connection signal="timeout" from="GrassTimer" to="TileMap" method="_on_grass_timer_timeout"]
-[connection signal="item_selected" from="UI/inventoryButton" to="TileMap" method="_on_inventory_button_item_selected"]
-[connection signal="pressed" from="UI/inventoryButton" to="UI/inventoryButton" method="_on_pressed"]

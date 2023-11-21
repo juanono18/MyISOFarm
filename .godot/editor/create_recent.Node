@@ -1,7 +1,8 @@
-OptionButton
 AudioStreamPlayer
-Node2D
+PopupMenu
 Label
+OptionButton
+Node2D
 RichTextLabel
 Sprite2D
 CanvasLayer

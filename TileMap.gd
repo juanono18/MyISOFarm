@@ -2,22 +2,32 @@ extends TileMap
 
 
 # Called when the node enters the scene tree for the first time.
-var grownState={
-	Vector2i(8,0):true,
-	Vector2i(14,0):true
+var inventory={
+	"wheatSeed":10,
+	"carrotSeed":10,
+	"wheat":0,
+	"carrot":0
 }
-var seedState={
-	Vector2i(4,0):true,
-	Vector2i(10,0):true
+
+var crops={
+	"grownState":{
+	Vector2i(8,0):"wheat",
+	Vector2i(14,0):"carrot"
+}, "seedState":{
+	Vector2i(4,0):"wheatSeed",
+	Vector2i(10,0):"carrotSeed"
+},
+	"seedCursor":"res://seed_cursor.png"
 }
 var tilesID = {
 	"grass":Vector2i(0,0),
 	"dirt":Vector2i(1,0),
 	"hoed_dirt":Vector2i(2,0),
 	"watered_dirt":Vector2i(3,0),
-	"seeded_dirt":Vector2i(10,0),
+	"seeded_dirt":null,
 	"grown_crop":Vector2i(14,0)
 }
+
 var seededFields = []
 var dirtFields = []
 var WheatCount = 0
@@ -27,8 +37,11 @@ var harvestSound: AudioStreamPlayer
 var plantSound: AudioStreamPlayer
 var waterSound: AudioStreamPlayer
 var prevTile
+
 func _ready():
-	pass # Replace with function body.
+	#$"../UI/inventoryButton".set_item_text(0,str("x%02d" % inventory["wheatSeed"]))
+	#$"../UI/inventoryButton".set_item_text(1,str("x%02d" % inventory["carrotSeed"]))
+	pass
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -40,13 +53,15 @@ func updateHoverOnTile():
 	if(get_cell_atlas_coords(1,tile) != Vector2i(-1,-1)):
 		if( get_cell_atlas_coords(1,tile) == tilesID["grass"] or  get_cell_atlas_coords(1,tile) == tilesID["dirt"]):
 			Input.set_custom_mouse_cursor(load("res://hoe_cursor.png"))
-		elif( get_cell_atlas_coords(0,Vector2i(tile.x-1,tile.y-1)) in seedState):
+		elif( get_cell_atlas_coords(0,Vector2i(tile.x-1,tile.y-1)) in crops["seedState"]):
 			Input.set_custom_mouse_cursor(load("res://water_cursor.png"))
-		elif( get_cell_atlas_coords(1,tile) == tilesID["hoed_dirt"]):
-			Input.set_custom_mouse_cursor(load("res://seed_cursor.png"))
-		elif(get_cell_atlas_coords(0,Vector2i(tile.x-1,tile.y-1)) in grownState):
+		elif( get_cell_atlas_coords(1,tile) == tilesID["hoed_dirt"]):	
+			Input.set_custom_mouse_cursor(load(crops["seedCursor"]))
+		elif(get_cell_atlas_coords(0,Vector2i(tile.x-1,tile.y-1)) in crops["grownState"]):
 			Input.set_custom_mouse_cursor(load("res://harvest_cursor.png"))
 		set_cell(2,Vector2(tile.x-1,tile.y-1),1,Vector2i(9,0),0)
+	else:
+		Input.set_custom_mouse_cursor(load("res://default_cursor.png"))
 	if(prevTile != null):
 		#print("here")
 		if(tile != prevTile):
@@ -77,10 +92,10 @@ func _input(event):
 		if(get_cell_atlas_coords(1,tile) == tilesID["grass"] or get_cell_atlas_coords(1,tile) == tilesID["dirt"]):
 			arar(tile)
 		#si es plantado regar
-		elif(get_cell_atlas_coords(0,Vector2(tile.x-1,tile.y-1)) in seedState):
+		elif(get_cell_atlas_coords(0,Vector2(tile.x-1,tile.y-1)) in crops["seedState"]):
 			regar(tile)
 		#si es cultivo recoger y poner tierra
-		elif(get_cell_atlas_coords(0,Vector2i(tile.x-1,tile.y-1)) in grownState):
+		elif(get_cell_atlas_coords(0,Vector2i(tile.x-1,tile.y-1)) in crops["grownState"]):
 			cosechar(tile)
 		#Si es arado plantar
 		elif(get_cell_atlas_coords(1,tile) == tilesID["hoed_dirt"]):
@@ -100,12 +115,23 @@ func cosechar(tile):
 	harvestSound.play()
 	set_cell(1,tile,1,tilesID["dirt"],0)
 	dirtFields.append(tile)
+
+	var currentCrop = crops["grownState"][get_cell_atlas_coords(0,Vector2(tile.x-1,tile.y-1))]
+	inventory[currentCrop] += 16
+	print(str(currentCrop)+": "+str(inventory[currentCrop]))
 	set_cell(0,Vector2(tile.x-1,tile.y-1),1,Vector2(-1,-1),0)
 	WheatCount = WheatCount+16
 	wslabel.text = str("%07d" % WheatCount)
 func sembrar(tile):
-	plantSound.play()
-	set_cell(0,Vector2(tile.x-1,tile.y-1),1,tilesID["seeded_dirt"],0)
+	
+	if tilesID["seeded_dirt"] != null and inventory[crops["seedState"][tilesID["seeded_dirt"]]] > 0:
+		plantSound.play()
+		set_cell(0,Vector2(tile.x-1,tile.y-1),1,tilesID["seeded_dirt"],0)
+		var currentCrop = crops["seedState"][get_cell_atlas_coords(0,Vector2(tile.x-1,tile.y-1))]
+		inventory[currentCrop] -= 1
+		$"../UI/inventoryButton/Label".text= str("x%02d" % inventory[currentCrop])
+	else:
+		$"../Sounds/denied".play()
 
 func _on_wheat_timer_timeout():
 	
@@ -136,3 +162,19 @@ func _on_grass_timer_timeout():
 			set_cell(1,dirt,1,tilesID["grass"],0)
 			dirtFields.erase(dirt)
 	pass # Replace with function body.
+
+
+func _on_inventory_button_item_selected(index):
+		match index:
+			0:
+				tilesID["seeded_dirt"] = Vector2i(4,0)
+				crops["seedCursor"] = "res://wheatseed_cursor.png"
+				$"../UI/inventoryButton/Label".text= str("x%02d" % inventory["wheatSeed"])
+			1:
+				tilesID["seeded_dirt"] = Vector2i(10,0)
+				crops["seedCursor"] = "res://carrotseed_cursor.png"
+				$"../UI/inventoryButton/Label".text= str("x%02d" %  inventory["carrotSeed"])
+			2:
+				crops["seedCursor"] = "res://seed_cursor.png"
+				$"../UI/inventoryButton".select(-1)
+				$"../UI/inventoryButton/Label".text= ""
