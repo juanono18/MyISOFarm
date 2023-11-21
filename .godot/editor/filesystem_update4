@@ -1,1 +1,3 @@
 res://world.tscn
+res://TileMap.gd
+res://Camera2D.gd

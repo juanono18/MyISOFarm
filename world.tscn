@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=3 uid="uid://d4fvwju6llih5"]
+[gd_scene load_steps=30 format=3 uid="uid://d4fvwju6llih5"]
 
 [ext_resource type="Script" path="res://world.gd" id="1_kpnr0"]
 [ext_resource type="Texture2D" uid="uid://d4acv3xj4w8e3" path="res://tileset.png" id="1_mxe2x"]
@@ -123,6 +123,13 @@ animations = [{
 font = ExtResource("8_ybhcg")
 font_size = 39
 
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_ich50"]
+texture = ExtResource("5_pqrvl")
+
+[sub_resource type="Theme" id="Theme_kgq3e"]
+default_font = ExtResource("8_ybhcg")
+OptionButton/styles/normal = SubResource("StyleBoxTexture_ich50")
+
 [node name="World" type="Node2D"]
 script = ExtResource("1_kpnr0")
 
@@ -202,6 +209,19 @@ offset_right = 1133.0
 offset_bottom = 76.0
 text = "0000000"
 label_settings = SubResource("LabelSettings_w66c2")
+
+[node name="OptionButton" type="OptionButton" parent="UI"]
+texture_filter = 1
+offset_left = 23.0
+offset_top = 10.0
+offset_right = 100.0
+offset_bottom = 57.0
+theme = SubResource("Theme_kgq3e")
+alignment = 2
+item_count = 1
+popup/item_0/text = "20"
+popup/item_0/icon = ExtResource("7_w3sif")
+popup/item_0/id = 0
 
 [node name="Sounds" type="Node2D" parent="."]
 
