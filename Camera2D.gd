@@ -8,12 +8,13 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
+	
 	pass
 
-func _input(event):
+func _unhandled_input(event):
+	if event is InputEventMouseMotion and event.button_mask == MOUSE_BUTTON_MASK_MIDDLE:
+		position -= event.relative*1.0 / zoom
 	if event.is_action_pressed("ZoomIn"):
 		zoom += Vector2(0.1,0.1)
 	if event.is_action_pressed("ZoomOut"):
 		zoom -= Vector2(0.1,0.1)
-	if event is InputEventMouseMotion and event.is_action_pressed("drag"):
-		position -= event.relative*1.0 / zoom

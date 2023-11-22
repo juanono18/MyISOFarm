@@ -8,7 +8,9 @@ var inventory={
 	"carrotSeed":0,
 	"wheat":0,
 	"carrot":0,
+	"flour":0,
 	"dirtBlock":2,
+	"windmillBlock":2,
 }
 var selectedItemCursor="default"
 var selectedItem
@@ -34,11 +36,15 @@ var tilesID = {
 	"hoed_dirt":Vector2i(2,0),
 	"watered_dirt":Vector2i(3,0),
 	"seeded_dirt":null,
-	"grown_crop":Vector2i(14,0)
+	"grown_crop":Vector2i(14,0),
+	"windmillBlock":Vector2i(16,0),
+	"windmillBlock_place":Vector2i(22,0),
+	"windmillBlockAnim":[Vector2i(16,0),Vector2i(17,0),Vector2i(18,0),Vector2i(19,0),Vector2i(20,0),Vector2i(21,0)]
 }
 
 var seededFields = []
 var dirtFields = []
+var windMill = []
 var WheatCount = 0
 var wslabel: Label
 var dirtSound: AudioStreamPlayer
@@ -60,7 +66,8 @@ func _process(delta):
 	
 func updateHoverOnTile():
 	var tile = local_to_map(Vector2(get_global_mouse_position().x+5,get_global_mouse_position().y+10))
-	if(get_cell_atlas_coords(1,tile) != Vector2i(-1,-1)):
+	if(get_cell_atlas_coords(1,tile) != Vector2i(-1,-1) and get_cell_atlas_coords(1,tile) != Vector2i(15,0)):
+		
 		if( get_cell_atlas_coords(1,tile) == tilesID["grass"] or  get_cell_atlas_coords(1,tile) == tilesID["dirt"]):
 			Input.set_custom_mouse_cursor(load("res://hoe_cursor.png"))
 		elif( get_cell_atlas_coords(0,Vector2i(tile.x-1,tile.y-1)) in crops["seedState"]):
@@ -69,10 +76,13 @@ func updateHoverOnTile():
 			Input.set_custom_mouse_cursor(load(crops["seedCursor"][selectedItemCursor]))
 		elif(get_cell_atlas_coords(0,Vector2i(tile.x-1,tile.y-1)) in crops["grownState"]):
 			Input.set_custom_mouse_cursor(load("res://harvest_cursor.png"))
-		set_cell(2,Vector2(tile.x-1,tile.y-1),1,Vector2i(9,0),0)
+		if selectedItem != null and inventory[selectedItem]>=1 and selectedItem in tilesID:
+			set_cell(2,Vector2(tile.x-1,tile.y-1),1,tilesID[selectedItem+"_place"],0)
+		else:
+			set_cell(2,Vector2(tile.x-1,tile.y-1),1,Vector2i(9,0),0)
 	else:
 		
-		if selectedItem == "dirtBlock":
+		if selectedItem == "dirtBlock" and inventory["dirtBlock"]>=1:
 			Input.set_custom_mouse_cursor(load("res://default_cursor.png"))
 			set_cell(1,tile,1,Vector2i(15,0),0)
 		else:
@@ -97,12 +107,32 @@ func setSounds( dirtSound1: AudioStreamPlayer,harvestSound1: AudioStreamPlayer,p
 	plantSound=plantSound1
 	waterSound=waterSound1
 	
-func _input(event):
+func _unhandled_input(event):
 	if event.is_action_pressed("LeftClick"):
 		var tile = local_to_map(Vector2(get_global_mouse_position().x+5,get_global_mouse_position().y+10))
 		#print(get_cell_atlas_coords(1,tile),get_cell_atlas_coords(0,Vector2(tile.x-1,tile.y-1)))
+		if(selectedItem != null and inventory[selectedItem]>=1 and selectedItem in tilesID):
+			inventory[selectedItem] -= 1
+			set_cell(1,tile,1,tilesID["grass"],0)
+			set_cell(0,Vector2(tile.x-1,tile.y-1),1,tilesID["windmillBlock"],0)
+			windMill.append([Vector2(tile.x-1,tile.y-1),0,false])
 		#si es tierra arar
-		if(get_cell_atlas_coords(1,tile) == tilesID["grass"] or get_cell_atlas_coords(1,tile) == tilesID["dirt"]):
+		elif(get_cell_atlas_coords(0,Vector2(tile.x-1,tile.y-1)) in tilesID["windmillBlockAnim"]):
+			var index = 0
+			for mill in windMill:
+					if mill[0] == Vector2(tile.x-1,tile.y-1):
+						
+						break
+					index+=1
+			if inventory["wheat"] >= 1 and !windMill[index][2]:
+				inventory["wheat"]-=1
+				windMill[index][2]=true
+				$"../UI/Container/MenuShop".updateInventory()
+				
+				
+					
+				
+		elif(get_cell_atlas_coords(1,tile) == tilesID["grass"] or get_cell_atlas_coords(1,tile) == tilesID["dirt"]):
 			arar(tile)
 		#si es plantado regar
 		elif(get_cell_atlas_coords(0,Vector2(tile.x-1,tile.y-1)) in crops["seedState"]):
@@ -118,10 +148,18 @@ func _input(event):
 			dirtFields.append(tile)
 			inventory["dirtBlock"] -= 1
 			set_cell(1,tile,1,tilesID["dirt"],0)
+			$"../UI/Container/MenuShop".updateInventory()
+			
 	if event.is_action_pressed("RightClick"):
 		var tile = local_to_map(Vector2(get_global_mouse_position().x+5,get_global_mouse_position().y+10))
-		if(get_cell_atlas_coords(1,tile) != Vector2i(-1,-1) and get_cell_atlas_coords(0,Vector2(tile.x-1,tile.y-1)) == Vector2i(-1,-1)):
-			set_cell(1,tile,1,tilesID["grass"],0)
+		if(get_cell_atlas_coords(1,tile) != Vector2i(-1,-1) and get_cell_atlas_coords(0,Vector2(tile.x-1,tile.y-1)) == Vector2i(-1,-1) and get_cell_atlas_coords(1,tile) != Vector2i(15,0)):
+			if get_cell_atlas_coords(1,tile) == tilesID["grass"]:
+				set_cell(1,tile,1, Vector2i(-1,-1),0)
+				set_cell(2,Vector2(tile.x-1,tile.y-1))
+				inventory["dirtBlock"]+=1
+				$"../UI/Container/MenuShop".updateInventory()
+			else:
+				set_cell(1,tile,1,tilesID["grass"],0)
 		
 
 func arar(tile):
@@ -184,6 +222,46 @@ func _on_grass_timer_timeout():
 			dirtFields.erase(dirt)
 	pass # Replace with function body.
 
+func _on_animation_timer_timeout():
+	for mill in windMill:
+		var tile = get_cell_atlas_coords(1,mill[0])
+		var frame = tilesID["windmillBlockAnim"]
+		if(mill[2]):
+			match mill[1]:
+				0:
+					set_cell(0,mill[0],1,frame[1],0)
+					mill[1] = mill[1]+1
+				1:
+					set_cell(0,mill[0],1,frame[2],0)
+					mill[1] = mill[1]+1
+				2:
+					set_cell(0,mill[0],1,frame[3],0)
+					mill[1] = mill[1]+1
+				3:
+					set_cell(0,mill[0],1,frame[4],0)
+					mill[1] = mill[1]+1
+				4:
+					set_cell(0,mill[0],1,frame[1],0)
+					mill[1] = mill[1]+1
+				5:
+					set_cell(0,mill[0],1,frame[2],0)
+					mill[1] = mill[1]+1
+				6:
+					set_cell(0,mill[0],1,frame[3],0)
+					mill[1] = mill[1]+1
+				7:
+					set_cell(0,mill[0],1,frame[4],0)
+					mill[1] = mill[1]+1
+				8:
+					set_cell(0,mill[0],1,frame[5],0)
+					mill[1] = 0
+					inventory["flour"]+=1
+					$"../UI/Container/MenuShop".updateInventory()
+					mill[2]=false
+		#var tile = get_cell_atlas_coords(0,seed["TileID"])
+	
+		pass # Replace with function body.
+	
 
 
 func setSelectedItem(id):
@@ -200,3 +278,5 @@ func setInventory(inv):
 	inventory=inv
 func getInventory():
 	return inventory
+
+

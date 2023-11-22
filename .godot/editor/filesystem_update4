@@ -1,3 +1,6 @@
 res://world.tscn
 res://TileMap.gd
 res://MenuShop.gd
+res://ScrollContainer.gd
+res://Camera2D.gd
+res://windmill.tres
