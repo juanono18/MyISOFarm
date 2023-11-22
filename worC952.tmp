@@ -1,0 +1,513 @@
+[gd_scene load_steps=66 format=3 uid="uid://d4fvwju6llih5"]
+
+[ext_resource type="Script" path="res://world.gd" id="1_kpnr0"]
+[ext_resource type="Texture2D" uid="uid://d4acv3xj4w8e3" path="res://tileset.png" id="1_mxe2x"]
+[ext_resource type="Texture2D" uid="uid://bxadacpuhjhnm" path="res://animatedBG.png" id="2_u82p7"]
+[ext_resource type="Script" path="res://Camera2D.gd" id="3_1bjbt"]
+[ext_resource type="Script" path="res://TileMap.gd" id="3_q0x14"]
+[ext_resource type="Texture2D" uid="uid://dj3ei34gd4kem" path="res://scorebox.png" id="5_pqrvl"]
+[ext_resource type="Texture2D" uid="uid://iify5cmm3a5k" path="res://WheatIcon.png" id="7_w3sif"]
+[ext_resource type="FontFile" uid="uid://cnvxbs545p4dy" path="res://VCR_OSD_MONO_1.001.ttf" id="8_ybhcg"]
+[ext_resource type="Texture2D" uid="uid://ddrb1nx55xupr" path="res://InventoryIcon_Closed.png" id="9_6llpv"]
+[ext_resource type="AudioStream" uid="uid://c6lj3rbos4e0g" path="res://477391__nuff3__steps-dirt_1b.ogg" id="9_24nw5"]
+[ext_resource type="AudioStream" uid="uid://dbkv0jrrdnbyr" path="res://699493__valenspire__plant_harvest_04.wav" id="10_bt84x"]
+[ext_resource type="Texture2D" uid="uid://bma5tyo01ttfh" path="res://InventoryIcon_Opened.png" id="10_ffumc"]
+[ext_resource type="Texture2D" uid="uid://b5p7edkj0lepp" path="res://popupboxTexture.png" id="11_aivt5"]
+[ext_resource type="Texture2D" uid="uid://c04o2lmtftbcw" path="res://popupboxTexture1.png" id="11_alen4"]
+[ext_resource type="AudioStream" uid="uid://b3s4mmybj1yfy" path="res://477782__breviceps__spitting-a-watermelon-seed.mp3" id="11_g67ca"]
+[ext_resource type="Texture2D" uid="uid://erj3glf7ucdm" path="res://wheatSeedBagTexture.png" id="12_bne0w"]
+[ext_resource type="AudioStream" uid="uid://ch2lbas6fkcpv" path="res://516257__wyronroberth__grab-_-can-watering.mp3" id="12_dd11e"]
+[ext_resource type="Texture2D" uid="uid://bs321hjdlok2o" path="res://carrotSeedBagTexture.png" id="13_210n2"]
+[ext_resource type="Script" path="res://inventoryButton.gd" id="13_rgkiy"]
+[ext_resource type="Texture2D" uid="uid://cti5hjak8kotr" path="res://CancelTexture.png" id="15_i657f"]
+[ext_resource type="Texture2D" uid="uid://c40i0te5jd3ta" path="res://MenuSH.png" id="17_1surw"]
+[ext_resource type="Script" path="res://MenuShop.gd" id="18_5y0tx"]
+[ext_resource type="Texture2D" uid="uid://brchixq8mhd7l" path="res://itemBox.png" id="19_lwcvc"]
+[ext_resource type="Texture2D" uid="uid://dvre7eeokee4k" path="res://itemBoxHover.png" id="20_55ef8"]
+[ext_resource type="Texture2D" uid="uid://bwvb5ef2ulp2s" path="res://itemBoxSelected.png" id="21_7a01u"]
+[ext_resource type="AudioStream" uid="uid://8k07t7m67bo2" path="res://419023__jacco18__acess-denied-buzz.mp3" id="21_lf5a1"]
+[ext_resource type="Texture2D" uid="uid://coiqecw2b8x4l" path="res://itemBoxDisabled.png" id="21_n8i8j"]
+[ext_resource type="AudioStream" uid="uid://bappd4cgduf0i" path="res://352117__inspectorj__dropping-wood-e.wav" id="22_m5kyv"]
+[ext_resource type="Texture2D" uid="uid://ouyiydsi885u" path="res://plusbuttontex.png" id="22_ticb7"]
+[ext_resource type="Texture2D" uid="uid://dkjn4qa52c78p" path="res://minusbuttontex.png" id="23_uii80"]
+[ext_resource type="Texture2D" uid="uid://bqhk3gg76ytf4" path="res://buybuttontex.png" id="24_hoxhx"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_ufafw"]
+texture = ExtResource("1_mxe2x")
+texture_region_size = Vector2i(32, 32)
+0:0/0 = 0
+1:0/0 = 0
+2:0/0 = 0
+3:0/0 = 0
+6:0/0 = 0
+7:0/0 = 0
+8:0/0 = 0
+9:0/0 = 0
+11:0/0 = 0
+12:0/0 = 0
+13:0/0 = 0
+14:0/0 = 0
+4:0/0 = 0
+5:0/0 = 0
+10:0/0 = 0
+
+[sub_resource type="TileSet" id="TileSet_tnypq"]
+resource_local_to_scene = true
+tile_shape = 1
+tile_layout = 5
+tile_size = Vector2i(32, 17)
+sources/1 = SubResource("TileSetAtlasSource_ufafw")
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nbgr6"]
+atlas = ExtResource("2_u82p7")
+region = Rect2(288, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_d0nbh"]
+atlas = ExtResource("2_u82p7")
+region = Rect2(320, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_owk18"]
+atlas = ExtResource("2_u82p7")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gdwq0"]
+atlas = ExtResource("2_u82p7")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_76fqy"]
+atlas = ExtResource("2_u82p7")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_m1kjt"]
+atlas = ExtResource("2_u82p7")
+region = Rect2(96, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vym3w"]
+atlas = ExtResource("2_u82p7")
+region = Rect2(128, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_u3gm0"]
+atlas = ExtResource("2_u82p7")
+region = Rect2(160, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1twui"]
+atlas = ExtResource("2_u82p7")
+region = Rect2(192, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1j68t"]
+atlas = ExtResource("2_u82p7")
+region = Rect2(224, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5ufh1"]
+atlas = ExtResource("2_u82p7")
+region = Rect2(256, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_8lmly"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_nbgr6")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_d0nbh")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_owk18")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gdwq0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_76fqy")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_m1kjt")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vym3w")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_u3gm0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1twui")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1j68t")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5ufh1")
+}],
+"loop": true,
+"name": &"default",
+"speed": 4.0
+}]
+
+[sub_resource type="LabelSettings" id="LabelSettings_w66c2"]
+font = ExtResource("8_ybhcg")
+font_size = 39
+
+[sub_resource type="ImageTexture" id="ImageTexture_njqoj"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_8y8qf"]
+texture = ExtResource("9_6llpv")
+modulate_color = Color(0.572549, 0.572549, 0.572549, 1)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_xlxve"]
+texture = ExtResource("9_6llpv")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_onrt8"]
+texture = ExtResource("10_ffumc")
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_2loor"]
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_7q32l"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_02cxr"]
+texture = ExtResource("11_alen4")
+modulate_color = Color(0.592157, 0.592157, 0.592157, 1)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_ncqk6"]
+texture = ExtResource("11_aivt5")
+
+[sub_resource type="Theme" id="Theme_kgq3e"]
+default_font = ExtResource("8_ybhcg")
+OptionButton/icons/arrow = SubResource("ImageTexture_njqoj")
+OptionButton/styles/hover = SubResource("StyleBoxTexture_8y8qf")
+OptionButton/styles/normal = SubResource("StyleBoxTexture_xlxve")
+OptionButton/styles/pressed = SubResource("StyleBoxTexture_onrt8")
+PopupMenu/colors/font_accelerator_color = Color(1, 1, 1, 1)
+PopupMenu/colors/font_color = Color(1, 1, 1, 1)
+PopupMenu/colors/font_disabled_color = Color(1, 1, 1, 1)
+PopupMenu/colors/font_hover_color = Color(1, 1, 1, 1)
+PopupMenu/colors/font_outline_color = Color(0, 0, 0, 1)
+PopupMenu/colors/font_separator_color = Color(0, 0, 0, 1)
+PopupMenu/colors/font_separator_outline_color = Color(0, 0, 0, 1)
+PopupMenu/constants/h_separation = 0
+PopupMenu/constants/icon_max_width = 0
+PopupMenu/constants/indent = 0
+PopupMenu/constants/item_end_padding = 0
+PopupMenu/constants/item_start_padding = 0
+PopupMenu/constants/outline_size = 0
+PopupMenu/constants/separator_outline_size = 0
+PopupMenu/constants/v_separation = 0
+PopupMenu/icons/radio_checked = SubResource("ViewportTexture_2loor")
+PopupMenu/icons/radio_checked_disabled = SubResource("ViewportTexture_2loor")
+PopupMenu/icons/radio_unchecked = SubResource("ViewportTexture_7q32l")
+PopupMenu/icons/submenu_mirrored = null
+PopupMenu/icons/unchecked = null
+PopupMenu/icons/unchecked_disabled = null
+PopupMenu/styles/hover = SubResource("StyleBoxTexture_02cxr")
+PopupMenu/styles/labeled_separator_left = null
+PopupMenu/styles/labeled_separator_right = null
+PopupMenu/styles/panel = SubResource("StyleBoxTexture_ncqk6")
+PopupMenu/styles/panel_disabled = SubResource("StyleBoxTexture_ncqk6")
+PopupMenu/styles/separator = null
+
+[sub_resource type="LabelSettings" id="LabelSettings_qrws6"]
+font = ExtResource("8_ybhcg")
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2pbyw"]
+atlas = ExtResource("17_1surw")
+region = Rect2(0, 0, 672, 238)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nc7am"]
+atlas = ExtResource("17_1surw")
+region = Rect2(672, 0, 672, 238)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vkpq6"]
+atlas = ExtResource("17_1surw")
+region = Rect2(1344, 0, 672, 238)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_nqaj5"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2pbyw")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_nc7am")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vkpq6")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_ooigh"]
+
+[sub_resource type="Theme" id="Theme_nwj22"]
+HScrollBar/styles/grabber = SubResource("StyleBoxTexture_ooigh")
+
+[sub_resource type="LabelSettings" id="LabelSettings_am3mm"]
+font = ExtResource("8_ybhcg")
+font_size = 12
+
+[sub_resource type="LabelSettings" id="LabelSettings_enjic"]
+font = ExtResource("8_ybhcg")
+font_size = 12
+
+[sub_resource type="LabelSettings" id="LabelSettings_2ei6v"]
+font = ExtResource("8_ybhcg")
+font_size = 12
+
+[node name="World" type="Node2D"]
+script = ExtResource("1_kpnr0")
+
+[node name="TileMap" type="TileMap" parent="."]
+y_sort_enabled = true
+texture_filter = 1
+tile_set = SubResource("TileSet_tnypq")
+format = 2
+layer_0/name = "0"
+layer_0/y_sort_enabled = true
+layer_1/name = "1"
+layer_1/enabled = true
+layer_1/modulate = Color(1, 1, 1, 1)
+layer_1/y_sort_enabled = true
+layer_1/y_sort_origin = 0
+layer_1/z_index = -1
+layer_1/tile_data = PackedInt32Array(131072, 1, 0, 196609, 1, 0, 262146, 1, 0, 131074, 1, 0, 196610, 1, 0, -65535, 1, 0, -131070, 1, 0, 2, 1, 0, -65536, 1, 0, 0, 1, 0, -131071, 1, 0, 65536, 1, 0, 1, 1, 0, 65537, 1, 0, 131073, 1, 0, 65538, 1, 0, -65534, 1, 0, 196611, 1, 0, 131075, 1, 0, 65539, 1, 0, 3, 1, 0, -65533, 1, 0, -65532, 1, 0, 4, 1, 0, 5, 1, 0, 65541, 1, 0, 131077, 1, 0, 131076, 1, 0, 65540, 1, 0, -131069, 1, 0, -196607, 1, 0, -196606, 1, 0, -262143, 1, 0, -65537, 1, 0, -131072, 1, 0, -1, 1, 0)
+layer_2/name = "hover"
+layer_2/enabled = true
+layer_2/modulate = Color(1, 1, 1, 1)
+layer_2/y_sort_enabled = true
+layer_2/y_sort_origin = -1
+layer_2/z_index = 0
+layer_2/tile_data = PackedInt32Array()
+script = ExtResource("3_q0x14")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(-53, 21)
+offset = Vector2(100, 0)
+zoom = Vector2(5, 5)
+drag_horizontal_enabled = true
+drag_vertical_enabled = true
+script = ExtResource("3_1bjbt")
+
+[node name="ParallaxBackground" type="ParallaxBackground" parent="."]
+scale = Vector2(30, 30)
+transform = Transform2D(30, 0, 0, 30, 0, 0)
+scroll_base_scale = Vector2(7, 7)
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="ParallaxBackground"]
+z_index = -5
+texture_filter = 1
+position = Vector2(19.2667, 10.9167)
+scale = Vector2(1.22083, 0.692708)
+sprite_frames = SubResource("SpriteFrames_8lmly")
+frame = 6
+
+[node name="WheatTimer" type="Timer" parent="."]
+wait_time = 2.0
+autostart = true
+
+[node name="GrassTimer" type="Timer" parent="."]
+wait_time = 2.0
+autostart = true
+
+[node name="UI" type="CanvasLayer" parent="."]
+layer = 5
+
+[node name="WheatScore" type="Node2D" parent="UI"]
+visible = false
+
+[node name="ScoreBox" type="Sprite2D" parent="UI/WheatScore"]
+texture_filter = 1
+position = Vector2(1050, 53)
+scale = Vector2(3, 3)
+texture = ExtResource("5_pqrvl")
+
+[node name="ScoreIcon" type="Sprite2D" parent="UI/WheatScore"]
+texture_filter = 1
+position = Vector2(908, 53)
+scale = Vector2(3, 3)
+texture = ExtResource("7_w3sif")
+
+[node name="Score" type="Label" parent="UI/WheatScore"]
+texture_filter = 1
+offset_left = 968.0
+offset_top = 32.0
+offset_right = 1133.0
+offset_bottom = 76.0
+text = "0000000"
+label_settings = SubResource("LabelSettings_w66c2")
+
+[node name="inventoryButton" type="OptionButton" parent="UI"]
+texture_filter = 1
+offset_left = 9.0
+offset_top = 10.0
+offset_right = 153.0
+offset_bottom = 130.0
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme = SubResource("Theme_kgq3e")
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 0
+theme_override_font_sizes/font_size = 0
+alignment = 1
+icon_alignment = 1
+expand_icon = true
+item_count = 3
+popup/item_0/text = ""
+popup/item_0/icon = ExtResource("12_bne0w")
+popup/item_0/id = 0
+popup/item_1/text = ""
+popup/item_1/icon = ExtResource("13_210n2")
+popup/item_1/id = 1
+popup/item_2/text = ""
+popup/item_2/icon = ExtResource("15_i657f")
+popup/item_2/id = 2
+script = ExtResource("13_rgkiy")
+
+[node name="Label" type="Label" parent="UI/inventoryButton"]
+layout_mode = 0
+offset_left = 89.0
+offset_top = 90.0
+offset_right = 129.0
+offset_bottom = 108.0
+label_settings = SubResource("LabelSettings_qrws6")
+horizontal_alignment = 2
+
+[node name="Container" type="GridContainer" parent="UI"]
+offset_top = 133.0
+offset_right = 1156.0
+offset_bottom = 647.0
+
+[node name="MenuShop" type="AnimatedSprite2D" parent="UI/Container"]
+texture_filter = 1
+position = Vector2(583, 600)
+sprite_frames = SubResource("SpriteFrames_nqaj5")
+script = ExtResource("18_5y0tx")
+
+[node name="OpenCloseButton" type="TextureButton" parent="UI/Container/MenuShop"]
+offset_left = -113.0
+offset_top = -118.0
+offset_right = 112.0
+offset_bottom = -86.0
+
+[node name="InvButton" type="TextureButton" parent="UI/Container/MenuShop"]
+offset_left = -329.0
+offset_top = -70.0
+offset_right = -7.0
+offset_bottom = 1.0
+
+[node name="ShopButton" type="TextureButton" parent="UI/Container/MenuShop"]
+offset_left = 8.0
+offset_top = -71.0
+offset_right = 328.0
+offset_bottom = 1.0
+
+[node name="ScrollContainer" type="ScrollContainer" parent="UI/Container/MenuShop"]
+offset_left = -308.0
+offset_top = 28.0
+offset_right = 178.0
+offset_bottom = 112.0
+theme = SubResource("Theme_nwj22")
+
+[node name="GridContainer" type="GridContainer" parent="UI/Container/MenuShop/ScrollContainer"]
+custom_minimum_size = Vector2(50, 9)
+layout_mode = 2
+theme_override_constants/h_separation = 21
+columns = 100
+
+[node name="ItemButton1" type="TextureButton" parent="UI/Container/MenuShop/ScrollContainer/GridContainer"]
+custom_minimum_size = Vector2(10, 9)
+layout_mode = 2
+texture_normal = ExtResource("19_lwcvc")
+texture_hover = ExtResource("20_55ef8")
+texture_disabled = ExtResource("21_n8i8j")
+texture_focused = ExtResource("21_7a01u")
+
+[node name="ItemSprite" type="Sprite2D" parent="UI/Container/MenuShop/ScrollContainer/GridContainer/ItemButton1"]
+texture_filter = 1
+position = Vector2(30.9999, 31)
+scale = Vector2(0.975, 1)
+
+[node name="QuantityLabel" type="Label" parent="UI/Container/MenuShop/ScrollContainer/GridContainer/ItemButton1"]
+layout_mode = 2
+offset_left = 42.9999
+offset_top = 46.0
+offset_right = 61.9999
+offset_bottom = 60.0
+label_settings = SubResource("LabelSettings_am3mm")
+
+[node name="idLabel" type="Label" parent="UI/Container/MenuShop/ScrollContainer/GridContainer/ItemButton1"]
+visible = false
+layout_mode = 0
+offset_left = 1.99994
+offset_top = 64.0
+offset_right = 41.9999
+offset_bottom = 90.0
+
+[node name="Label" type="Label" parent="UI/Container/MenuShop"]
+offset_left = 210.0
+offset_top = 28.0
+offset_right = 308.0
+offset_bottom = 70.0
+text = "Unidades: 10 P/u $10 Total:$100"
+label_settings = SubResource("LabelSettings_enjic")
+horizontal_alignment = 3
+autowrap_mode = 3
+
+[node name="addunit" type="TextureButton" parent="UI/Container/MenuShop"]
+offset_left = 290.0
+offset_top = 74.0
+offset_right = 305.0
+offset_bottom = 89.0
+texture_normal = ExtResource("22_ticb7")
+
+[node name="removeunit" type="TextureButton" parent="UI/Container/MenuShop"]
+offset_left = 213.0
+offset_top = 74.0
+offset_right = 228.0
+offset_bottom = 89.0
+texture_normal = ExtResource("23_uii80")
+
+[node name="buy" type="TextureButton" parent="UI/Container/MenuShop"]
+offset_left = 229.0
+offset_top = 74.0
+offset_right = 289.0
+offset_bottom = 89.0
+texture_normal = ExtResource("24_hoxhx")
+
+[node name="Label" type="Label" parent="UI/Container/MenuShop/buy"]
+layout_mode = 0
+offset_left = 3.0
+offset_top = 1.0
+offset_right = 57.0
+offset_bottom = 15.0
+text = "vender"
+label_settings = SubResource("LabelSettings_2ei6v")
+horizontal_alignment = 1
+
+[node name="Sounds" type="Node2D" parent="."]
+position = Vector2(-19, 9)
+
+[node name="hoe" type="AudioStreamPlayer" parent="Sounds"]
+stream = ExtResource("9_24nw5")
+
+[node name="harvest" type="AudioStreamPlayer" parent="Sounds"]
+stream = ExtResource("10_bt84x")
+
+[node name="plant" type="AudioStreamPlayer" parent="Sounds"]
+stream = ExtResource("11_g67ca")
+
+[node name="watering" type="AudioStreamPlayer" parent="Sounds"]
+stream = ExtResource("12_dd11e")
+
+[node name="denied" type="AudioStreamPlayer" parent="Sounds"]
+stream = ExtResource("21_lf5a1")
+
+[node name="openinv" type="AudioStreamPlayer" parent="Sounds"]
+stream = ExtResource("22_m5kyv")
+
+[connection signal="timeout" from="WheatTimer" to="TileMap" method="_on_wheat_timer_timeout"]
+[connection signal="timeout" from="GrassTimer" to="TileMap" method="_on_grass_timer_timeout"]
+[connection signal="item_selected" from="UI/inventoryButton" to="TileMap" method="_on_inventory_button_item_selected"]
+[connection signal="pressed" from="UI/inventoryButton" to="UI/inventoryButton" method="_on_pressed"]
+[connection signal="pressed" from="UI/Container/MenuShop/OpenCloseButton" to="UI/Container/MenuShop" method="_on_open_close_button_pressed"]
+[connection signal="pressed" from="UI/Container/MenuShop/InvButton" to="UI/Container/MenuShop" method="_on_inv_button_pressed"]
+[connection signal="pressed" from="UI/Container/MenuShop/ShopButton" to="UI/Container/MenuShop" method="_on_shop_button_pressed"]

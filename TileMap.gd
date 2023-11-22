@@ -3,21 +3,30 @@ extends TileMap
 
 # Called when the node enters the scene tree for the first time.
 var inventory={
-	"wheatSeed":10,
-	"carrotSeed":10,
+	"money":0,
+	"wheatSeed":5,
+	"carrotSeed":0,
 	"wheat":0,
-	"carrot":0
+	"carrot":0,
+	"dirtBlock":2,
 }
-
+var selectedItemCursor="default"
+var selectedItem
 var crops={
 	"grownState":{
 	Vector2i(8,0):"wheat",
 	Vector2i(14,0):"carrot"
 }, "seedState":{
 	Vector2i(4,0):"wheatSeed",
-	Vector2i(10,0):"carrotSeed"
+	"wheatSeed":Vector2i(4,0),
+	Vector2i(10,0):"carrotSeed",
+	"carrotSeed":Vector2i(10,0)
 },
-	"seedCursor":"res://seed_cursor.png"
+	"seedCursor":{
+		"wheatSeed":"res://wheatseed_cursor.png",
+		"carrotSeed":"res://carrotseed_cursor.png",
+		"default":"res://seed_cursor.png"
+	}
 }
 var tilesID = {
 	"grass":Vector2i(0,0),
@@ -36,7 +45,8 @@ var dirtSound: AudioStreamPlayer
 var harvestSound: AudioStreamPlayer
 var plantSound: AudioStreamPlayer
 var waterSound: AudioStreamPlayer
-var prevTile
+var prevTileBlock = null
+var prevTile = null
 
 func _ready():
 	#$"../UI/inventoryButton".set_item_text(0,str("x%02d" % inventory["wheatSeed"]))
@@ -56,18 +66,27 @@ func updateHoverOnTile():
 		elif( get_cell_atlas_coords(0,Vector2i(tile.x-1,tile.y-1)) in crops["seedState"]):
 			Input.set_custom_mouse_cursor(load("res://water_cursor.png"))
 		elif( get_cell_atlas_coords(1,tile) == tilesID["hoed_dirt"]):	
-			Input.set_custom_mouse_cursor(load(crops["seedCursor"]))
+			Input.set_custom_mouse_cursor(load(crops["seedCursor"][selectedItemCursor]))
 		elif(get_cell_atlas_coords(0,Vector2i(tile.x-1,tile.y-1)) in crops["grownState"]):
 			Input.set_custom_mouse_cursor(load("res://harvest_cursor.png"))
 		set_cell(2,Vector2(tile.x-1,tile.y-1),1,Vector2i(9,0),0)
 	else:
-		Input.set_custom_mouse_cursor(load("res://default_cursor.png"))
+		
+		if selectedItem == "dirtBlock":
+			Input.set_custom_mouse_cursor(load("res://default_cursor.png"))
+			set_cell(1,tile,1,Vector2i(15,0),0)
+		else:
+			Input.set_custom_mouse_cursor(load("res://default_cursor.png"))
 	if(prevTile != null):
-		#print("here")
 		if(tile != prevTile):
-			#print(prevTile)
 			set_cell(2,Vector2(prevTile.x-1,prevTile.y-1))
+			
+	if(prevTileBlock != null):
+		if(tile != prevTileBlock and get_cell_atlas_coords(1,prevTileBlock) == Vector2i(15,0)):
+			#print(prevTile)
+			set_cell(1,prevTileBlock,1,Vector2i(-1,-1),0)
 	prevTile = tile
+	prevTileBlock = tile
 	
 func setWslabel(label:Label):
 	wslabel = label
@@ -79,12 +98,6 @@ func setSounds( dirtSound1: AudioStreamPlayer,harvestSound1: AudioStreamPlayer,p
 	waterSound=waterSound1
 	
 func _input(event):
-	if event.is_action_pressed("hotbar1"):
-		tilesID["seeded_dirt"]= Vector2i(4,0)
-		tilesID["grown_crop"]=Vector2i(8,0)
-	if event.is_action_pressed("hotbar2"):
-		tilesID["seeded_dirt"]= Vector2i(10,0)
-		tilesID["grown_crop"]=Vector2i(14,0)
 	if event.is_action_pressed("LeftClick"):
 		var tile = local_to_map(Vector2(get_global_mouse_position().x+5,get_global_mouse_position().y+10))
 		#print(get_cell_atlas_coords(1,tile),get_cell_atlas_coords(0,Vector2(tile.x-1,tile.y-1)))
@@ -100,6 +113,15 @@ func _input(event):
 		#Si es arado plantar
 		elif(get_cell_atlas_coords(1,tile) == tilesID["hoed_dirt"]):
 			sembrar(tile)
+		elif(get_cell_atlas_coords(1,tile) == Vector2i(15,0) and inventory["dirtBlock"]>=1):
+			dirtSound.play()
+			dirtFields.append(tile)
+			inventory["dirtBlock"] -= 1
+			set_cell(1,tile,1,tilesID["dirt"],0)
+	if event.is_action_pressed("RightClick"):
+		var tile = local_to_map(Vector2(get_global_mouse_position().x+5,get_global_mouse_position().y+10))
+		if(get_cell_atlas_coords(1,tile) != Vector2i(-1,-1) and get_cell_atlas_coords(0,Vector2(tile.x-1,tile.y-1)) == Vector2i(-1,-1)):
+			set_cell(1,tile,1,tilesID["grass"],0)
 		
 
 func arar(tile):
@@ -117,11 +139,10 @@ func cosechar(tile):
 	dirtFields.append(tile)
 
 	var currentCrop = crops["grownState"][get_cell_atlas_coords(0,Vector2(tile.x-1,tile.y-1))]
-	inventory[currentCrop] += 16
+	inventory[currentCrop] += 8
 	print(str(currentCrop)+": "+str(inventory[currentCrop]))
 	set_cell(0,Vector2(tile.x-1,tile.y-1),1,Vector2(-1,-1),0)
-	WheatCount = WheatCount+16
-	wslabel.text = str("%07d" % WheatCount)
+	$"../UI/Container/MenuShop".updateInventory()
 func sembrar(tile):
 	
 	if tilesID["seeded_dirt"] != null and inventory[crops["seedState"][tilesID["seeded_dirt"]]] > 0:
@@ -129,7 +150,7 @@ func sembrar(tile):
 		set_cell(0,Vector2(tile.x-1,tile.y-1),1,tilesID["seeded_dirt"],0)
 		var currentCrop = crops["seedState"][get_cell_atlas_coords(0,Vector2(tile.x-1,tile.y-1))]
 		inventory[currentCrop] -= 1
-		$"../UI/inventoryButton/Label".text= str("x%02d" % inventory[currentCrop])
+		$"../UI/Container/MenuShop".updateInventory()
 	else:
 		$"../Sounds/denied".play()
 
@@ -164,17 +185,18 @@ func _on_grass_timer_timeout():
 	pass # Replace with function body.
 
 
-func _on_inventory_button_item_selected(index):
-		match index:
-			0:
-				tilesID["seeded_dirt"] = Vector2i(4,0)
-				crops["seedCursor"] = "res://wheatseed_cursor.png"
-				$"../UI/inventoryButton/Label".text= str("x%02d" % inventory["wheatSeed"])
-			1:
-				tilesID["seeded_dirt"] = Vector2i(10,0)
-				crops["seedCursor"] = "res://carrotseed_cursor.png"
-				$"../UI/inventoryButton/Label".text= str("x%02d" %  inventory["carrotSeed"])
-			2:
-				crops["seedCursor"] = "res://seed_cursor.png"
-				$"../UI/inventoryButton".select(-1)
-				$"../UI/inventoryButton/Label".text= ""
+
+func setSelectedItem(id):
+		selectedItem = id
+		if id in crops["seedState"]:
+			tilesID["seeded_dirt"] = crops["seedState"][id]
+			if crops["seedCursor"][id] != null:
+				selectedItemCursor = id
+		else:
+			selectedItemCursor="default"
+			tilesID["seeded_dirt"] = null
+		
+func setInventory(inv):
+	inventory=inv
+func getInventory():
+	return inventory
