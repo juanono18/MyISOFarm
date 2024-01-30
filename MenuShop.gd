@@ -8,32 +8,25 @@ var id
 var shop={
 	"sellPrice":{
 		"dirtBlock":20,
-		"windmillBlock":50,
 		"wheatSeed":1,
 		"carrotSeed":1,
 		"wheat":10,
-		"carrot":15,
-		"flour":20,
+		"carrot":15
 	},
 	"buyPrice":{
-		"dirtBlock":200,
-		"wheatSeed":50,
-		"carrotSeed":100,
-		"windmillBlock":500,
+		"dirtBlock":100,
+		"wheatSeed":5,
+		"carrotSeed":10
 	}
 }
 var shopInv={
-	"carrotSeed":"$100",
-	"wheatSeed":"$50",
-	"flour":"$20",
-	"dirtBlock":"$200",
-	"windmillBlock":"$500",
+	"carrotSeed":"$10",
+	"wheatSeed":"$5",
+	"dirtBlock":"$100"
 	
 }
 var idTex= {
 	"dirtBlock":"res://DirtIcon.png",
-	"flour":"res://flourTexture-export.png",
-	"windmillBlock":"res://DirtIcon.png",
 	"wheatSeed":"res://wheatSeedBagTexture.png",
 	"carrotSeed":"res://carrotSeedBagTexture.png",
 	"wheat":"res://WheatIcon.png",
@@ -52,7 +45,6 @@ func _process(delta):
 	pass
 
 func updateShop():
-	unidades=0
 	for itemSlot in $ScrollContainer/GridContainer.get_children():
 				for ItemSlotChild in itemSlot.get_children():
 					if ItemSlotChild.name == "ItemSprite" and ItemSlotChild.texture == null:
@@ -65,7 +57,6 @@ func updateShop():
 						ItemSlotChild.text=""
 	loadShop()
 func updateInventory():
-	unidades=0
 	for itemSlot in $ScrollContainer/GridContainer.get_children():
 				for ItemSlotChild in itemSlot.get_children():
 					if ItemSlotChild.name == "ItemSprite" and ItemSlotChild.texture == null:
@@ -194,6 +185,11 @@ func _on_shop_button_pressed():
 	pass # Replace with function body.
 
 
+
+
+
+
+
 func _on_item_button_pressed(sender):
 	$"../../../Sounds/UIClick".play()
 	id=sender.get_child(2).text
@@ -245,7 +241,6 @@ func _on_buy_pressed():
 	if inShop:
 		
 		if inventory["money"] >= (unidades*shop["buyPrice"][id]):
-			$"../../../Sounds/buysell".play()
 			inventory[id]+=unidades
 			inventory["money"]-= (unidades*shop["buyPrice"][id])
 			updateShop()

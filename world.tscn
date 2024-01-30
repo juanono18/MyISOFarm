@@ -1,4 +1,4 @@
-[gd_scene load_steps=58 format=3 uid="uid://d4fvwju6llih5"]
+[gd_scene load_steps=54 format=3 uid="uid://d4fvwju6llih5"]
 
 [ext_resource type="Script" path="res://world.gd" id="1_kpnr0"]
 [ext_resource type="Texture2D" uid="uid://d4acv3xj4w8e3" path="res://tileset.png" id="1_mxe2x"]
@@ -6,10 +6,8 @@
 [ext_resource type="Script" path="res://Camera2D.gd" id="3_1bjbt"]
 [ext_resource type="Script" path="res://TileMap.gd" id="3_q0x14"]
 [ext_resource type="Texture2D" uid="uid://dj3ei34gd4kem" path="res://scorebox.png" id="5_pqrvl"]
-[ext_resource type="Texture2D" uid="uid://derkbpu5e3c27" path="res://scrollbarbar.png" id="8_thj1i"]
 [ext_resource type="FontFile" uid="uid://cnvxbs545p4dy" path="res://VCR_OSD_MONO_1.001.ttf" id="8_ybhcg"]
 [ext_resource type="AudioStream" uid="uid://c6lj3rbos4e0g" path="res://477391__nuff3__steps-dirt_1b.ogg" id="9_24nw5"]
-[ext_resource type="Texture2D" uid="uid://df1jw53gry05v" path="res://scrollbarbar_hover.png" id="9_abva5"]
 [ext_resource type="AudioStream" uid="uid://dbkv0jrrdnbyr" path="res://699493__valenspire__plant_harvest_04.wav" id="10_bt84x"]
 [ext_resource type="AudioStream" uid="uid://b3s4mmybj1yfy" path="res://477782__breviceps__spitting-a-watermelon-seed.mp3" id="11_g67ca"]
 [ext_resource type="AudioStream" uid="uid://ch2lbas6fkcpv" path="res://516257__wyronroberth__grab-_-can-watering.mp3" id="12_dd11e"]
@@ -51,13 +49,6 @@ texture_region_size = Vector2i(32, 32)
 5:0/0 = 0
 10:0/0 = 0
 15:0/0 = 0
-16:0/0 = 0
-18:0/0 = 0
-17:0/0 = 0
-20:0/0 = 0
-21:0/0 = 0
-19:0/0 = 0
-22:0/0 = 0
 
 [sub_resource type="TileSet" id="TileSet_tnypq"]
 resource_local_to_scene = true
@@ -180,19 +171,10 @@ animations = [{
 "speed": 5.0
 }]
 
-[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_4ydrw"]
-texture = ExtResource("8_thj1i")
-
-[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_k8x8a"]
-texture = ExtResource("9_abva5")
-
-[sub_resource type="StyleBoxLine" id="StyleBoxLine_miy3p"]
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_ooigh"]
 
 [sub_resource type="Theme" id="Theme_nwj22"]
-HScrollBar/styles/grabber = SubResource("StyleBoxTexture_4ydrw")
-HScrollBar/styles/grabber_highlight = SubResource("StyleBoxTexture_k8x8a")
-HScrollBar/styles/grabber_pressed = SubResource("StyleBoxTexture_k8x8a")
-HScrollBar/styles/scroll = SubResource("StyleBoxLine_miy3p")
+HScrollBar/styles/grabber = SubResource("StyleBoxTexture_ooigh")
 
 [sub_resource type="LabelSettings" id="LabelSettings_am3mm"]
 font = ExtResource("8_ybhcg")
@@ -226,7 +208,7 @@ layer_1/modulate = Color(1, 1, 1, 1)
 layer_1/y_sort_enabled = true
 layer_1/y_sort_origin = 0
 layer_1/z_index = -1
-layer_1/tile_data = PackedInt32Array(-65535, 1, 0)
+layer_1/tile_data = PackedInt32Array(131072, 1, 0, 196609, 1, 0, 262146, 1, 0, 131074, 1, 0, 196610, 1, 0, -65535, 1, 0, -131070, 1, 0, 2, 1, 0, -65536, 1, 0, 0, 1, 0, -131071, 1, 0, 65536, 1, 0, 1, 1, 0, 65537, 1, 0, 131073, 1, 0, 65538, 1, 0, -65534, 1, 0, 196611, 1, 0, 131075, 1, 0, 65539, 1, 0, 3, 1, 0, -65533, 1, 0, -65532, 1, 0, 4, 1, 0, 5, 1, 0, 65541, 1, 0, 131077, 1, 0, 131076, 1, 0, 65540, 1, 0, -131069, 1, 0, -196607, 1, 0, -196606, 1, 0, -262143, 1, 0, -65537, 1, 0, -131072, 1, 0, -1, 1, 0)
 layer_2/name = "hover"
 layer_2/enabled = true
 layer_2/modulate = Color(1, 1, 1, 1)
@@ -265,20 +247,16 @@ autostart = true
 wait_time = 2.0
 autostart = true
 
-[node name="AnimationTimer" type="Timer" parent="."]
-wait_time = 0.2
-autostart = true
-
 [node name="UI" type="CanvasLayer" parent="."]
 layer = 5
 
 [node name="Container" type="GridContainer" parent="UI"]
 offset_right = 1156.0
-offset_bottom = 853.0
+offset_bottom = 647.0
 
 [node name="MenuShop" type="AnimatedSprite2D" parent="UI/Container"]
 texture_filter = 1
-position = Vector2(583, 731)
+position = Vector2(583, 730)
 sprite_frames = SubResource("SpriteFrames_nqaj5")
 script = ExtResource("18_5y0tx")
 
@@ -287,7 +265,6 @@ offset_left = -113.0
 offset_top = -118.0
 offset_right = 112.0
 offset_bottom = -86.0
-focus_mode = 1
 
 [node name="InvButton" type="TextureButton" parent="UI/Container/MenuShop"]
 offset_left = -329.0
@@ -305,7 +282,7 @@ offset_bottom = 1.0
 offset_left = -308.0
 offset_top = 28.0
 offset_right = 178.0
-offset_bottom = 113.0
+offset_bottom = 112.0
 theme = SubResource("Theme_nwj22")
 
 [node name="GridContainer" type="GridContainer" parent="UI/Container/MenuShop/ScrollContainer"]
@@ -494,36 +471,6 @@ offset_top = 64.0
 offset_right = 41.9999
 offset_bottom = 90.0
 
-[node name="ItemButton7" type="TextureButton" parent="UI/Container/MenuShop/ScrollContainer/GridContainer"]
-custom_minimum_size = Vector2(10, 9)
-layout_mode = 2
-texture_normal = ExtResource("19_lwcvc")
-texture_hover = ExtResource("20_55ef8")
-texture_disabled = ExtResource("21_n8i8j")
-texture_focused = ExtResource("21_7a01u")
-
-[node name="ItemSprite" type="Sprite2D" parent="UI/Container/MenuShop/ScrollContainer/GridContainer/ItemButton7"]
-texture_filter = 1
-position = Vector2(30.9999, 31)
-scale = Vector2(0.975, 1)
-
-[node name="QuantityLabel" type="Label" parent="UI/Container/MenuShop/ScrollContainer/GridContainer/ItemButton7"]
-layout_mode = 2
-offset_left = 35.0
-offset_top = 46.0
-offset_right = 58.0
-offset_bottom = 60.0
-label_settings = SubResource("LabelSettings_am3mm")
-horizontal_alignment = 2
-
-[node name="idLabel" type="Label" parent="UI/Container/MenuShop/ScrollContainer/GridContainer/ItemButton7"]
-visible = false
-layout_mode = 0
-offset_left = 1.99994
-offset_top = 64.0
-offset_right = 41.9999
-offset_bottom = 90.0
-
 [node name="BuySellDialog" type="Label" parent="UI/Container/MenuShop"]
 offset_left = 210.0
 offset_top = 28.0
@@ -626,7 +573,6 @@ stream = ExtResource("29_2gdvs")
 
 [connection signal="timeout" from="WheatTimer" to="TileMap" method="_on_wheat_timer_timeout"]
 [connection signal="timeout" from="GrassTimer" to="TileMap" method="_on_grass_timer_timeout"]
-[connection signal="timeout" from="AnimationTimer" to="TileMap" method="_on_animation_timer_timeout"]
 [connection signal="pressed" from="UI/Container/MenuShop/OpenCloseButton" to="UI/Container/MenuShop" method="_on_open_close_button_pressed"]
 [connection signal="pressed" from="UI/Container/MenuShop/InvButton" to="UI/Container/MenuShop" method="_on_inv_button_pressed"]
 [connection signal="pressed" from="UI/Container/MenuShop/ShopButton" to="UI/Container/MenuShop" method="_on_shop_button_pressed"]

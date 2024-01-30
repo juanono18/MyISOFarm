@@ -1,4 +1,3 @@
-Timer
 AudioStreamPlayer2D
 Label
 TextureButton
@@ -20,6 +19,7 @@ RichTextLabel
 CanvasLayer
 MarginContainer
 SubViewport
+Timer
 ParallaxBackground
 Camera2D
 TileMap
