@@ -1,3 +1,13 @@
-res://world.tscn
-res://TileMap.gd
-res://MenuShop.gd
+res://Scripts/deer.gd
+res://Scenes/deer.tscn
+res://Shader/toptree.gdshader
+res://Shader/water.gdshader
+res://Scenes/tileset.tres
+res://Assets/anim/new_animation_node_state_machine.tres
+res://Shader/world.gdshader
+res://Scenes/world.tscn
+res://Scripts/TileMap.gd
+res://Scenes/DatabaseUpdater.tscn
+res://DataBase/db.json
+res://Scripts/dbHandler.gd
+res://Scenes/location.tscn

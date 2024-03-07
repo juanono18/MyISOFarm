@@ -1,0 +1,39 @@
+[gd_scene load_steps=3 format=3 uid="uid://edvjrch6syox"]
+
+[ext_resource type="Script" path="res://Scripts/DatabaseUpdater.gd" id="1_viapp"]
+[ext_resource type="PackedScene" uid="uid://drpw6gs0tr1ll" path="res://Scenes/DbScreenItem.tscn" id="2_hkjry"]
+
+[node name="Control" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_viapp")
+db_item = ExtResource("2_hkjry")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ScrollContainer" type="ScrollContainer" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="GridContainer" type="GridContainer" parent="VBoxContainer/ScrollContainer"]
+custom_minimum_size = Vector2(0, 600)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Button" type="Button" parent="VBoxContainer"]
+custom_minimum_size = Vector2(0, 45)
+layout_mode = 2
+text = "Update"
+
+[connection signal="pressed" from="VBoxContainer/Button" to="." method="_on_button_pressed"]

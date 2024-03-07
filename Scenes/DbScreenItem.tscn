@@ -1,0 +1,29 @@
+[gd_scene load_steps=2 format=3 uid="uid://drpw6gs0tr1ll"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_nq326"]
+bg_color = Color(0, 0, 0, 1)
+border_width_top = 6
+border_color = Color(0.188235, 0.184314, 0.172549, 1)
+
+[node name="VBoxContainer" type="VBoxContainer" groups=["dbItem"]]
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 74.0
+grow_horizontal = 2
+size_flags_horizontal = 3
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "(1,0)"
+
+[node name="TextEdit" type="TextEdit" parent="."]
+custom_minimum_size = Vector2(300, 30)
+layout_mode = 2
+size_flags_horizontal = 4
+scroll_fit_content_height = true
+
+[node name="HSeparator" type="HSeparator" parent="."]
+layout_mode = 2
+theme_override_constants/separation = 8
+theme_override_styles/separator = SubResource("StyleBoxFlat_nq326")

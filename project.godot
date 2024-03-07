@@ -10,14 +10,17 @@ config_version=5
 
 [application]
 
-config/name="My Iso Farm"
-run/main_scene="res://world.tscn"
-config/features=PackedStringArray("4.1", "Mobile")
-config/icon="res://icon.svg"
+config/name="IsoSystem"
+run/main_scene="res://Scenes/world.tscn"
+config/features=PackedStringArray("4.2", "Mobile")
+config/icon="res://Assets/Icons/gameIcon.png"
 
 [display]
 
-window/size/resizable=false
+window/size/viewport_width=1024
+window/size/viewport_height=576
+window/stretch/mode="canvas_items"
+window/stretch/aspect="ignore"
 
 [input]
 

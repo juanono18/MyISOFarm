@@ -1,0 +1,127 @@
+[gd_resource type="TileSet" load_steps=12 format=3 uid="uid://m0ui1gu8dunx"]
+
+[ext_resource type="Shader" path="res://Shader/toptree.gdshader" id="1_xt24n"]
+[ext_resource type="Shader" path="res://Shader/water.gdshader" id="2_hxvxk"]
+[ext_resource type="Texture2D" uid="uid://d4acv3xj4w8e3" path="res://Assets/Textures/tileset.png" id="3_1bxwq"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_xptdy"]
+shader = ExtResource("1_xt24n")
+shader_parameter/time = null
+shader_parameter/wind_strength = 1.0
+shader_parameter/frequency = 1.0
+shader_parameter/amplitude = 3.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_2rypp"]
+shader = ExtResource("1_xt24n")
+shader_parameter/time = null
+shader_parameter/wind_strength = 1.0
+shader_parameter/frequency = 1.0
+shader_parameter/amplitude = 3.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_kw64q"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_b54ew"]
+shader = ExtResource("1_xt24n")
+shader_parameter/time = 100.0
+shader_parameter/wind_strength = 1.0
+shader_parameter/frequency = 1.0
+shader_parameter/amplitude = 3.147
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_lvqg0"]
+shader = ExtResource("1_xt24n")
+shader_parameter/time = null
+shader_parameter/wind_strength = 1.0
+shader_parameter/frequency = 1.0
+shader_parameter/amplitude = 3.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_i7hv5"]
+shader = ExtResource("1_xt24n")
+shader_parameter/time = null
+shader_parameter/wind_strength = 1.0
+shader_parameter/frequency = 1.0
+shader_parameter/amplitude = 3.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_tt4g5"]
+shader = ExtResource("2_hxvxk")
+shader_parameter/wind_strength = 1.0
+shader_parameter/frequency = 2.0
+shader_parameter/amplitude = 2.0
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_ufafw"]
+texture = ExtResource("3_1bxwq")
+texture_region_size = Vector2i(32, 32)
+0:0/0 = 0
+0:0/0/texture_origin = Vector2i(0, -5)
+0:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+0:0/0/physics_layer_0/angular_velocity = 0.0
+0:0/0/custom_data_0 = true
+1:0/0 = 0
+1:0/0/texture_origin = Vector2i(0, -5)
+1:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+1:0/0/physics_layer_0/angular_velocity = 0.0
+1:0/0/custom_data_0 = true
+2:0/0 = 0
+2:0/0/texture_origin = Vector2i(0, -5)
+2:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+2:0/0/physics_layer_0/angular_velocity = 0.0
+3:0/0 = 0
+3:0/0/texture_origin = Vector2i(0, 12)
+3:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+3:0/0/physics_layer_0/angular_velocity = 0.0
+3:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-10.5625, -5.6875, -10.6875, -0.9375, -2.5625, 0.8125, 6.1875, -0.5625, 9.0625, -6.1875)
+6:0/0 = 0
+6:0/0/texture_origin = Vector2i(0, 12)
+6:0/0/material = SubResource("ShaderMaterial_lvqg0")
+6:0/0/y_sort_origin = -5
+6:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+6:0/0/physics_layer_0/angular_velocity = 0.0
+7:0/0 = 0
+7:0/0/texture_origin = Vector2i(0, 12)
+7:0/0/material = SubResource("ShaderMaterial_i7hv5")
+7:0/0/y_sort_origin = -5
+7:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+7:0/0/physics_layer_0/angular_velocity = 0.0
+8:0/0 = 0
+8:0/0/texture_origin = Vector2i(0, -10)
+8:0/0/material = SubResource("ShaderMaterial_tt4g5")
+8:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+8:0/0/physics_layer_0/angular_velocity = 0.0
+8:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, 0, 0, -8, 16, 0, 0, 8)
+9:0/0 = 0
+9:0/0/texture_origin = Vector2i(0, 12)
+9:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+9:0/0/physics_layer_0/angular_velocity = 0.0
+4:0/0 = 0
+4:0/0/texture_origin = Vector2i(0, 13)
+4:0/0/material = SubResource("ShaderMaterial_kw64q")
+4:0/0/y_sort_origin = -10
+4:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+4:0/0/physics_layer_0/angular_velocity = 0.0
+4:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-12.1, -1.95, -9.625, -6.75, 9.14819, -7.24785, 10, -3, 0.625, -0.5)
+5:0/0 = 0
+5:0/0/texture_origin = Vector2i(0, 10)
+5:0/0/material = SubResource("ShaderMaterial_b54ew")
+5:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+5:0/0/physics_layer_0/angular_velocity = 0.0
+10:0/0 = 0
+10:0/0/texture_origin = Vector2i(0, 12)
+10:0/0/material = SubResource("ShaderMaterial_xptdy")
+10:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+10:0/0/physics_layer_0/angular_velocity = 0.0
+11:0/0 = 0
+11:0/0/texture_origin = Vector2i(0, 12)
+11:0/0/material = SubResource("ShaderMaterial_2rypp")
+11:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+11:0/0/physics_layer_0/angular_velocity = 0.0
+
+[resource]
+resource_local_to_scene = true
+tile_shape = 1
+tile_layout = 5
+tile_size = Vector2i(32, 16)
+physics_layer_0/collision_layer = 1
+custom_data_layer_0/name = "plowable"
+custom_data_layer_0/type = 1
+custom_data_layer_1/name = "tileName"
+custom_data_layer_1/type = 21
+sources/1 = SubResource("TileSetAtlasSource_ufafw")
