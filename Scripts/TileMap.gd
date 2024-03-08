@@ -53,6 +53,7 @@ func load_tiles():
 			print(db_handler.getCellName(get_cell_atlas_coords(1,cell)))
 			var instance = scene.instantiate()
 			instance.position = map_to_local(cell)
+			print(instance.position)
 			add_child(instance)
 
 #not ideal

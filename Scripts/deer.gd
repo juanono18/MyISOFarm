@@ -14,7 +14,8 @@ func _physics_process(delta):
 	if hunger >= hunger_capacity:
 		queue_free()
 	if velocity == Vector2.ZERO:
-		$AnimationTree.get("parameters/playback").travel("Idle")
+		if $StateMachine.current_state.name != "Eat":
+			$AnimationTree.get("parameters/playback").travel("Idle")
 	else:
 		$AnimationTree.get("parameters/playback").travel("Walk")
 		$AnimationTree.set("parameters/Idle/blend_position",velocity)
@@ -25,5 +26,11 @@ func _physics_process(delta):
 
 #not ideal
 func _on_detection_range_area_entered(area):
-	tile_map.empty_bush(area.position)
+
+	pass # Replace with function body.
+
+
+func _on_close_range_area_entered(area):
+	if $StateMachine.current_state.name != "Eat":
+		tile_map.empty_bush(area.position)
 	pass # Replace with function body.

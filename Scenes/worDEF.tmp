@@ -52,16 +52,17 @@ drag_horizontal_enabled = true
 drag_vertical_enabled = true
 script = ExtResource("8_ivfwi")
 
-[node name="deer" parent="TileMap" node_paths=PackedStringArray("tile_map") instance=ExtResource("8_m5fpa")]
+[node name="DirectionalLight2D" type="DirectionalLight2D" parent="."]
+color = Color(1, 0.407843, 0.309804, 1)
+energy = 0.2
+
+[node name="deer" parent="." node_paths=PackedStringArray("tile_map") instance=ExtResource("8_m5fpa")]
 z_index = 2
-position = Vector2(-241.667, 134.667)
+position = Vector2(-725, 404)
+scale = Vector2(3, 3)
 collision_layer = 1
 collision_mask = 1
 speed = 100
 stamina = 3
 hunger_capacity = 10
-tile_map = NodePath("..")
-
-[node name="DirectionalLight2D" type="DirectionalLight2D" parent="."]
-color = Color(1, 0.407843, 0.309804, 1)
-energy = 0.2
+tile_map = NodePath("../TileMap")

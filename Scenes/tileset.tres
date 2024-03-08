@@ -25,7 +25,7 @@ shader = ExtResource("1_xt24n")
 shader_parameter/time = 100.0
 shader_parameter/wind_strength = 1.0
 shader_parameter/frequency = 1.0
-shader_parameter/amplitude = 3.147
+shader_parameter/amplitude = 2.0
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_lvqg0"]
 shader = ExtResource("1_xt24n")
@@ -106,11 +106,13 @@ texture_region_size = Vector2i(32, 32)
 10:0/0 = 0
 10:0/0/texture_origin = Vector2i(0, 12)
 10:0/0/material = SubResource("ShaderMaterial_xptdy")
+10:0/0/y_sort_origin = -5
 10:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
 10:0/0/physics_layer_0/angular_velocity = 0.0
 11:0/0 = 0
 11:0/0/texture_origin = Vector2i(0, 12)
 11:0/0/material = SubResource("ShaderMaterial_2rypp")
+11:0/0/y_sort_origin = -5
 11:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
 11:0/0/physics_layer_0/angular_velocity = 0.0
 

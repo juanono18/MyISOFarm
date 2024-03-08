@@ -1,7 +1,7 @@
+Node
 CollisionShape2D
 Area2D
 NavigationAgent2D
-Node
 ProgressBar
 TextureProgressBar
 Label

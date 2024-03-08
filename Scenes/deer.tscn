@@ -1,4 +1,4 @@
-[gd_scene load_steps=29 format=3 uid="uid://br5uk4txmdwx3"]
+[gd_scene load_steps=32 format=3 uid="uid://br5uk4txmdwx3"]
 
 [ext_resource type="Script" path="res://Scripts/deer.gd" id="1_3h6h4"]
 [ext_resource type="Texture2D" uid="uid://ceuextb3pu87c" path="res://Assets/Sprites/Deer/deerSpriteSheet.png" id="2_hr7xn"]
@@ -7,6 +7,8 @@
 [ext_resource type="Script" path="res://Scripts/Wonder.gd" id="5_2rqme"]
 [ext_resource type="Script" path="res://Scripts/Rest.gd" id="6_a5onu"]
 [ext_resource type="Script" path="res://Scripts/InfoTab.gd" id="6_kske8"]
+[ext_resource type="Script" path="res://Scripts/WalkTo.gd" id="7_vyb7h"]
+[ext_resource type="Script" path="res://Scripts/Eat.gd" id="8_wkre1"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_feam2"]
 radius = 4.0
@@ -414,7 +416,11 @@ bg_color = Color(0.196078, 0.713726, 0.243137, 1)
 [sub_resource type="CircleShape2D" id="CircleShape2D_bj5yg"]
 radius = 43.0116
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_ngmpa"]
+
 [node name="deer" type="CharacterBody2D"]
+collision_layer = 2
+collision_mask = 2
 script = ExtResource("1_3h6h4")
 
 [node name="body" type="Sprite2D" parent="."]
@@ -439,9 +445,9 @@ libraries = {
 }
 tree_root = ExtResource("3_w1hln")
 anim_player = NodePath("../AnimationPlayer")
-parameters/Eat/blend_position = Vector2(0.720768, 0.938326)
-parameters/Idle/blend_position = Vector2(-0.806763, -0.356828)
-parameters/Walk/blend_position = Vector2(-0.570048, 0.312775)
+parameters/Eat/blend_position = Vector2(-1.34729, 0.73545)
+parameters/Idle/blend_position = Vector2(-0.591623, 0.619048)
+parameters/Walk/blend_position = Vector2(-0.427574, 0.428571)
 
 [node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("initial_state")]
 script = ExtResource("4_6x3ip")
@@ -456,7 +462,17 @@ move_speed = 100.0
 script = ExtResource("6_a5onu")
 resting_entity = NodePath("../..")
 
+[node name="WalkTo" type="Node" parent="StateMachine" node_paths=PackedStringArray("moving_entity")]
+script = ExtResource("7_vyb7h")
+moving_entity = NodePath("../..")
+
+[node name="Eat" type="Node" parent="StateMachine" node_paths=PackedStringArray("eating_entity", "animationTree")]
+script = ExtResource("8_wkre1")
+eating_entity = NodePath("../..")
+animationTree = NodePath("../../AnimationTree")
+
 [node name="Control" type="Control" parent="." node_paths=PackedStringArray("entity", "state_machine")]
+visible = false
 z_index = 2
 layout_mode = 3
 anchors_preset = 0
@@ -532,4 +548,14 @@ show_percentage = false
 [node name="CollisionShape2D" type="CollisionShape2D" parent="DetectionRange"]
 shape = SubResource("CircleShape2D_bj5yg")
 
+[node name="CloseRange" type="Area2D" parent="."]
+monitorable = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CloseRange"]
+shape = SubResource("CircleShape2D_ngmpa")
+
 [connection signal="area_entered" from="DetectionRange" to="." method="_on_detection_range_area_entered"]
+[connection signal="area_entered" from="DetectionRange" to="StateMachine/Wonder" method="_on_detection_range_area_entered"]
+[connection signal="area_entered" from="DetectionRange" to="StateMachine/Rest" method="_on_detection_range_area_entered"]
+[connection signal="area_entered" from="DetectionRange" to="StateMachine/WalkTo" method="_on_detection_range_area_entered"]
+[connection signal="area_entered" from="CloseRange" to="." method="_on_close_range_area_entered"]

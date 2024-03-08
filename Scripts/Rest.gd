@@ -20,3 +20,9 @@ func Update(delta:float):
 	pass
 func Physics_Update(delta:float):
 	pass
+
+
+func _on_detection_range_area_entered(area):
+	print("walkto2")
+	Trasitioned.emit(self,"WalkTo")
+	pass # Replace with function body.

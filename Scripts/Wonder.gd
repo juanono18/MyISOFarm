@@ -27,3 +27,9 @@ func Physics_Update(delta: float):
 	if wanderer_entity:
 		wanderer_entity.velocity = move_direction * wanderer_entity.speed
 		
+
+
+func _on_detection_range_area_entered(area):
+	print("walkto1")
+	Trasitioned.emit(self,"WalkTo")
+	pass # Replace with function body.
