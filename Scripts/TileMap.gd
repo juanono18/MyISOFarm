@@ -45,14 +45,15 @@ func selector_placement(tile_mouse_pos):
 
 #necesita mejoras
 func load_tiles():
-	var scene = preload("res://Scenes/location.tscn")
+	var scene = preload("res://Scenes/bush.tscn")
 	var map_size = get_used_cells(1)
 	for cell:Vector2i in map_size:
 		
-		if get_cell_atlas_coords(1,cell) == db_handler.getCoords("bush_full"):
+		if get_cell_atlas_coords(1,cell) == db_handler.getCoords("bush"):
 			print(db_handler.getCellName(get_cell_atlas_coords(1,cell)))
 			var instance = scene.instantiate()
 			instance.position = map_to_local(cell)
+			instance.refill_time = 5
 			print(instance.position)
 			add_child(instance)
 

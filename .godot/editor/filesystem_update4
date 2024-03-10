@@ -4,12 +4,12 @@ res://Shader/water.gdshader
 res://Scenes/tileset.tres
 res://Assets/anim/new_animation_node_state_machine.tres
 res://Shader/world.gdshader
-res://Scripts/world.gd
 res://Scenes/deer.tscn
 res://Scenes/location.tscn
-res://Scripts/WalkTo.gd
-res://Scripts/Rest.gd
-res://Scripts/Wonder.gd
 res://Scripts/deer.gd
-res://Scripts/TileMap.gd
+res://Scenes/bush.tscn
+res://Scripts/WalkTo.gd
 res://Scripts/Eat.gd
+res://Scripts/bush.gd
+res://Scripts/Wonder.gd
+res://Scripts/TileMap.gd

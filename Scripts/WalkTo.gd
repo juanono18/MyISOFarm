@@ -27,7 +27,7 @@ func Physics_Update(delta:float):
 
 func _on_detection_range_area_entered(area):
 	print(area.position)
-	point_pos = area.position
+	point_pos = area.get_parent().position
 	pass # Replace with function body.
 
 

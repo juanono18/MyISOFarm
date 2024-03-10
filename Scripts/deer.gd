@@ -24,13 +24,3 @@ func _physics_process(delta):
 	move_and_slide()
 	
 
-#not ideal
-func _on_detection_range_area_entered(area):
-
-	pass # Replace with function body.
-
-
-func _on_close_range_area_entered(area):
-	if $StateMachine.current_state.name != "Eat":
-		tile_map.empty_bush(area.position)
-	pass # Replace with function body.

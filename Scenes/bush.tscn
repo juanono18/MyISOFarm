@@ -1,0 +1,38 @@
+[gd_scene load_steps=5 format=3 uid="uid://by1xyhnlaksea"]
+
+[ext_resource type="Texture2D" uid="uid://bevneufomvar6" path="res://Assets/Sprites/Bush/bush-Sheet.png" id="1_5dh12"]
+[ext_resource type="Script" path="res://Scripts/bush.gd" id="2_xdpla"]
+[ext_resource type="Texture2D" uid="uid://b2211ymy0xoqm" path="res://Assets/Sprites/UI/progressBarCirc.png" id="3_aha1q"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_ovg6l"]
+radius = 6.08276
+
+[node name="bush" type="Sprite2D"]
+z_index = 2
+y_sort_enabled = true
+texture = ExtResource("1_5dh12")
+hframes = 2
+frame = 1
+script = ExtResource("2_xdpla")
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("CircleShape2D_ovg6l")
+
+[node name="TextureProgressBar" type="TextureProgressBar" parent="."]
+z_index = 98
+offset_left = -8.0
+offset_top = -25.0
+offset_right = 9.0
+offset_bottom = 8.0
+value = 100.0
+fill_mode = 5
+texture_under = ExtResource("3_aha1q")
+texture_progress = ExtResource("3_aha1q")
+tint_progress = Color(0.317647, 0.741176, 0.317647, 1)
+
+[node name="Timer" type="Timer" parent="TextureProgressBar"]
+
+[connection signal="value_changed" from="TextureProgressBar" to="." method="_on_texture_progress_bar_value_changed"]
+[connection signal="timeout" from="TextureProgressBar/Timer" to="." method="_on_timer_timeout"]

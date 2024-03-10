@@ -558,4 +558,6 @@ shape = SubResource("CircleShape2D_ngmpa")
 [connection signal="area_entered" from="DetectionRange" to="StateMachine/Wonder" method="_on_detection_range_area_entered"]
 [connection signal="area_entered" from="DetectionRange" to="StateMachine/Rest" method="_on_detection_range_area_entered"]
 [connection signal="area_entered" from="DetectionRange" to="StateMachine/WalkTo" method="_on_detection_range_area_entered"]
+[connection signal="body_entered" from="DetectionRange" to="." method="_on_detection_range_body_entered"]
 [connection signal="area_entered" from="CloseRange" to="." method="_on_close_range_area_entered"]
+[connection signal="area_entered" from="CloseRange" to="StateMachine/Eat" method="_on_close_range_area_entered"]

@@ -30,6 +30,7 @@ func Physics_Update(delta: float):
 
 
 func _on_detection_range_area_entered(area):
-	print("walkto1")
-	Trasitioned.emit(self,"WalkTo")
+	if !area.get_parent().is_empty:
+		print("walkto1")
+		Trasitioned.emit(self,"WalkTo")
 	pass # Replace with function body.
